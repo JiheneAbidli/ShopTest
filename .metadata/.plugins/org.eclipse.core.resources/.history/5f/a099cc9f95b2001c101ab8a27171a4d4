@@ -1,0 +1,16 @@
+package ShopTest;
+
+public class ShopTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenuim\\Download\\chromedriver_win32\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		driver.get("https://chgbcrefqa1nwac:8254/ebanking/login.html/login/form");
+
+	}
+
+}

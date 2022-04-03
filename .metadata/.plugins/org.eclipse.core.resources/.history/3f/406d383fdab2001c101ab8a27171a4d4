@@ -1,0 +1,63 @@
+package ShopTest;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ShopTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenuim\\Download\\chromedriver_win32\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		// Naviguer sur l'url hhtp://shop.demoqa.com/
+		driver.get("https://shop.demoqa.com");
+
+		// Choisir n'importe quel article et le sélectionner
+		WebElement Article = driver.findElement(By.xpath("//a[normalize-space()='Tokyo Talkies']"));
+		Article.click();
+
+		
+		// Choisir une option couleur (Color) 
+		
+		List<WebElement> SelectColor = driver.findElements(By.xpath("//select[@id='color']//option"));
+		Thread.sleep(500);
+		for (WebElement sc : SelectColor) {
+			if (sc.getText().equals("Black")) {
+				sc.click();
+				return;
+			}
+		}
+
+		Thread.sleep(2000);
+
+		// Choisir une option taille (Size) //List<WebElement> SelectSize =
+		driver.findElements(By.xpath("//select[@id='size']//option"));
+		List<WebElement> SelectSize = driver.findElements(By.xpath("//table//tbody//tr//following::tr//option"));
+
+		Thread.sleep(500);
+		for (WebElement ss : SelectSize) {
+			if (ss.getText().equals("L")) {
+				ss.click();
+				return;
+			}
+		}
+
+		Thread.sleep(1000);
+
+		WebElement AddtoCart = driver.findElement(By.xpath("//button[normalize-space()='Add to cart']"));
+		AddtoCart.click();
+
+	}
+
+}

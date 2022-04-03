@@ -1,0 +1,50 @@
+package ShopTest;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class ShopTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenuim\\Download\\chromedriver_win32\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		// Naviguer sur l'url hhtp://shop.demoqa.com/
+		driver.get("https://shop.demoqa.com");
+
+		// Choisir n'importe quel article et le sélectionner
+		WebElement Article = driver.findElement(By.xpath("//a[normalize-space()='Tokyo Talkies']"));
+		Article.click();
+
+		// Choisir une option couleur (Color)
+		/*
+		WebElement SelectColor = driver.findElement(By.xpath("//select[@id='color']"));
+		SelectColor.click();
+		*/
+		
+				
+		//ul[@id='select2-district-results']/li
+	
+		             
+		             List <WebElement> SelectColor =  driver.findElements(By.xpath("//select[@class='attached enabled']/option"));
+		             Thread.sleep(500);
+		                         for(WebElement s : SelectColor) {
+		                             if(s.getText().equals("Black")) {
+		                                 s.click();
+		                                 return;
+		                             }
+		                     }
+		             
+		// Choisir une option taille (Size)
+
+	}
+
+}

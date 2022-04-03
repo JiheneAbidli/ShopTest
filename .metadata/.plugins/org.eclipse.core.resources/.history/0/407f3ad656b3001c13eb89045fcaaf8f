@@ -1,0 +1,142 @@
+package ShopTest;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ShopTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenuim\\Download\\chromedriver_win32\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		// Naviguer sur l'url hhtp://shop.demoqa.com/
+		driver.get("https://shop.demoqa.com");
+
+		// Choisir n'importe quel article et le sélectionner
+		WebElement Article = driver.findElement(By.xpath("//a[normalize-space()='Tokyo Talkies']"));
+		Article.click();
+
+		// Color
+		WebElement Color = driver.findElement(By.xpath("//select[@id='color']"));
+		Color.click();
+		Color.sendKeys("B");
+
+		// Size
+		WebElement Size = driver.findElement(By.xpath("//select[@id='size']"));
+		Size.click();
+		Size.sendKeys("L");
+
+		// Add to cart
+		WebElement AddtoCart = driver.findElement(By.xpath("//button[normalize-space()='Add to cart']"));
+		AddtoCart.click();
+
+		// Check that there is a displayed message appears "“Tokyo Talkies” has been
+		// added to your cart."
+
+		WebElement text = driver
+				.findElement(By.xpath("//*[text()=' “Tokyo Talkies” has been added to your cart.	']"));
+
+		if (text.isDisplayed()) {
+			System.out.println("Element found using text");
+		}
+
+		else {
+			System.out.println("Element not found");
+			driver.quit();
+		}
+
+		// Click on "View cart" button
+		WebElement ViewCart = driver.findElement(By.xpath("//a[@class='button wc-forward']"));
+		ViewCart.click();
+
+		// Click on "Proceed to checkout" button
+		WebElement ProceedCheckout = driver
+				.findElement(By.xpath("//a[@class='checkout-button button alt wc-forward']"));
+		ProceedCheckout.click();
+
+		// BILLING DETAILS
+		// Remplir tous les champs obligatoire
+		// First Name
+		WebElement FirstName = driver.findElement(By.xpath("//input[@id='billing_first_name']"));
+		FirstName.sendKeys("Jihene");
+
+		// Last Name
+		WebElement LastName = driver.findElement(By.xpath("//input[@id='billing_last_name']"));
+		LastName.sendKeys("Abidli");
+
+		// Country
+		WebElement Country = driver.findElement(By.xpath("//b[@role='presentation']"));
+		Country.click();
+
+		WebElement Combo = driver.findElement(By.xpath("//input[@role='combobox']"));
+		Combo.sendKeys("Tunisia");
+		Combo.sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+
+		// Street address
+		// Housa number and street number
+		WebElement HouseNbr = driver.findElement(By.xpath("//input[@id='billing_address_1']"));
+		HouseNbr.click();
+		HouseNbr.sendKeys("Tunis 19 street 1850");
+		HouseNbr.sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+
+		// Apartment, suite, unit
+		WebElement Apartment = driver.findElement(By.xpath("//input[@id='billing_address_2']"));
+		Apartment.sendKeys("Apartment Ariana");
+
+		// Town City
+		WebElement TownCity = driver.findElement(By.xpath("//input[@id='billing_city']"));
+		TownCity.sendKeys("Tunis");
+
+		// State country
+		WebElement StateCtry = driver.findElement(By.xpath("//input[@id='billing_state']"));
+		StateCtry.sendKeys("Ariana");
+
+		// PostCode
+		WebElement PostCode = driver.findElement(By.xpath("//input[@id='billing_postcode']"));
+		PostCode.sendKeys("Ariana");
+
+		// Phone
+		WebElement Phone = driver.findElement(By.xpath("//input[@id='billing_phone']"));
+		Phone.sendKeys("0021651388574");
+
+		// Email address
+		WebElement EmailAddr = driver.findElement(By.xpath("//input[@id='billing_email']"));
+		EmailAddr.sendKeys("jihene1989.abidli@gmail.com");
+		Thread.sleep(2000);
+
+		// CheckBox
+
+		// Scrolling down the page till the element is found
+
+		WebElement FindLabel = driver.findElement(By.xpath("//label[@for='payment_method_cod']"));
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", FindLabel);
+		Thread.sleep(2000);
+
+		WebElement CheckBox = (new WebDriverWait(driver, 10000)).until(ExpectedConditions.presenceOfElementLocated(
+				By.xpath("//span[contains(text(),'I have read and agree to the website ')]")));
+		CheckBox.click();
+		
+		//Click on "Place order" button
+		
+		WebElement PlaceOrder = driver.findElement(By.xpath("//button[@id='place_order']"));
+		PlaceOrder.click();
+		
+
+	}
+
+}

@@ -1,0 +1,12 @@
+package ShopTest;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class AddToCart extends ShopTest {
+
+	//Add to cart
+	WebElement AddtoCart = driver.findElement(By.xpath("//button[normalize-space()='Add to cart']"));
+	AddtoCart.click();
+	
+}
